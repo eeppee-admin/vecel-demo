@@ -59,15 +59,17 @@ app.use('/app/auth', authRouter);
 const fileRouter = require('./routes/file');
 app.use('/app/file', fileRouter);
 
-// 在服务器配置前添加静态目录：
-// 在已有静态目录配置下添加
-// http://localhost:3000/uploads/a.txt 当uploads有文件时才加载内容
-app.use('/uploads', express.static('public/uploads'));
-// http://localhost:3000/file-manager
-app.use('/file-manager', express.static('public/file-manager'));
-// http://localhost:3000/games/snake/index.html
-app.use('/games', express.static(path.join(__dirname, 'public/games')));
 
+if (false) {
+    // 在服务器配置前添加静态目录：
+    // 在已有静态目录配置下添加
+    // http://localhost:3000/uploads/a.txt 当uploads有文件时才加载内容
+    app.use('/uploads', express.static('public/uploads'));
+    // http://localhost:3000/file-manager
+    app.use('/file-manager', express.static('public/file-manager'));
+    // http://localhost:3000/games/snake/index.html
+    app.use('/games', express.static(path.join(__dirname, 'public/games')));
+}
 
 
 
