@@ -3,12 +3,7 @@ const app = express();
 require('dotenv').config();
 const session = require('express-session');
 const passport = require('passport');
-const helmet = require('helmet');
-// 在已有中间件后添加
-// const { apiLimiter, recaptchaMiddleware } = require('./middlewares/security');
-// app.use(helmet());
-// app.use('/api/', apiLimiter);
-
+const path = require('path');
 // 引入路由文件
 const videoRouter = require('./routes/videos');
 const tiangouRouter = require('./routes/tiangou');
@@ -19,17 +14,15 @@ const patientRouter = require('./routes/patient');
 const queueRouter = require('./routes/queue');
 const eroticRouter = require('./routes/erotic');
 const emailRouter = require('./routes/email');
+
+// 上面是依赖
+
 // 基础端点
 app.get('/', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date() });
 });
 
-app.get('/api/random', (req, res) => {
-    res.json({
-        randomNumber: Math.floor(Math.random() * 1000),
-        timestamp: new Date().toISOString()
-    });
-});
+
 
 // 会话配置
 app.use(session({
@@ -68,10 +61,17 @@ app.use('/app/file', fileRouter);
 
 // 在服务器配置前添加静态目录：
 // 在已有静态目录配置下添加
+// http://localhost:3000/uploads/a.txt 当uploads有文件时才加载内容
 app.use('/uploads', express.static('public/uploads'));
+// http://localhost:3000/file-manager
 app.use('/file-manager', express.static('public/file-manager'));
+// http://localhost:3000/games/snake/index.html
+app.use('/games', express.static(path.join(__dirname, 'public/games')));
 
-// 服务器配置
+
+
+
+// Vercel服务器配置
 if (process.env.VERCEL_ENV) {
     module.exports = app;
 } else {
