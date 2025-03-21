@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文件管理系统</title>
+    <link rel="stylesheet" href="/file-manager/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>文件管理中心</h1>
+
+        <!-- 上传功能区域 -->
+        <div class="upload-section">
+            <!-- 普通文件上传 -->
+            <div class="upload-card">
+                <h3>单个文件上传</h3>
+                <label class="upload-btn">
+                    <input type="file" id="fileInput" hidden>
+                    选择文件
+                </label>
+            </div>
+
+            <!-- 大文件上传 -->
+            <div class="upload-card">
+                <h3>大文件上传（1GB以内）</h3>
+                <label class="upload-btn" id="bigFileBtn">
+                    <input type="file" id="bigFile" hidden>
+                    选择大文件
+                </label>
+                <div id="bigFileProgress" class="progress-container">
+                    <div class="progress-bar" style="width:0%">0%</div>
+                </div>
+            </div>
+
+            <!-- 文件夹上传 -->
+            <div class="upload-card">
+                <h3>文件夹上传(实验性支持)</h3>
+                <label class="upload-btn" id="folderBtn">
+                    <input type="file" id="folderInput" webkitdirectory hidden>
+                    选择文件夹
+                </label>
+            </div>
+        </div>
+
+        <!-- 文件列表 -->
+        <div class="file-list">
+            <h3>已上传文件 <span id="fileCount">(加载中...)</span></h3>
+            <div id="fileList" class="file-items">
+                <!-- 文件列表通过JS动态加载 -->
+            </div>
+        </div>
+    </div>
+    <script src="/file-manager/main.js"></script>
+</body>
+
+</html>
