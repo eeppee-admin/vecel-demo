@@ -4,6 +4,8 @@ require('dotenv').config();
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
+const morgan = require('morgan');
+
 // 引入路由文件
 const videoRouter = require('./routes/videos');
 const tiangouRouter = require('./routes/tiangou');
@@ -14,7 +16,9 @@ const patientRouter = require('./routes/patient');
 const queueRouter = require('./routes/queue');
 const eroticRouter = require('./routes/erotic');
 const emailRouter = require('./routes/email');
-
+const imageRouter = require('./routes/image');
+const animeRouter = require('./routes/anime');
+// const translateRouter = require('./routes/translate');
 // 上面是依赖
 
 // 基础端点
@@ -36,15 +40,17 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(morgan(':method :url :status - :response-time ms'));
 // 新增JSON解析中间件
 app.use(express.json());
 
-// 路由分配
-app.use('/api/videos', videoRouter);
-app.use('/api/tiangou', tiangouRouter);
+// 维梦api路由分配
+app.use('/app/video', videoRouter);
+app.use('/app/tiangou', tiangouRouter);
 app.use('/app/music', musicRouter);
-
-
+app.use('/app/image', imageRouter);
+app.use('/app/anime', animeRouter);
+// app.use('/app/translate', translateRouter);
 // 新增用户数据路由
 app.use('/app/user', userRouter);
 app.use('/app/medicine', medicineRouter);
@@ -55,12 +61,10 @@ app.use('/app/email', emailRouter);
 // 引入认证路由
 const authRouter = require('./routes/auth');
 app.use('/app/auth', authRouter);
-// 在路由分配部分添加：
-const fileRouter = require('./routes/file');
-app.use('/app/file', fileRouter);
-
 
 if (false) {
+    const fileRouter = require('./routes/file');
+    app.use('/app/file', fileRouter);
     // 在服务器配置前添加静态目录：
     // 在已有静态目录配置下添加
     // http://localhost:3000/uploads/a.txt 当uploads有文件时才加载内容

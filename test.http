@@ -19,3 +19,21 @@ GET https://api.52vmy.cn/api/img/fan?url=https://api.52vmy.cn/wx.png
 
 ###
 GET https://api.52vmy.cn/api/img/heibai?url=https://api.52vmy.cn/wx.png
+
+
+###
+GET https://api.52vmy.cn/api/img/tu/girl
+
+###
+GET https://api.52vmy.cn/api/min?msg=骚逼水很多
+
+###
+GET https://api.52vmy.cn/api/query/fanyi/youdao?msg=你好吗？是的，我非常的好！
+
+
+###
+GET https://api.52vmy.cn/api/video/yule
+
+
+###
+GET https://api.52vmy.cn/api/video/redian

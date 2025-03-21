@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>即时翻译工具</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .translator-box {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1557b0;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="translator-box">
+        <h1>中英即时翻译器</h1>
+        <textarea id="inputText" placeholder="输入要翻译的中文..."></textarea>
+        <button onclick="translate()">立即翻译</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function translate() {
+            const input = document.getElementById('inputText').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!input) {
+                resultDiv.innerHTML = '<p style="color:red">请输入要翻译的内容</p>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<p>翻译中...</p>';
+
+            try {
+                const response = await fetch(`/app/translate?text=${encodeURIComponent(input)}`);
+                const data = await response.json();
+
+                if (data && data.translation) {
+                    resultDiv.innerHTML = `
+                        <p><strong>原文：</strong>${data.original}</p>
+                        <p><strong>译文：</strong>${data.translation}</p>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<p style="color:red">翻译失败，请稍后重试</p>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<p style="color:red">连接服务器失败</p>';
+            }
+        }
+    </script>
+</body>
+
+</html>
