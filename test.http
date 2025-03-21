@@ -1,0 +1,21 @@
+GET https://api.52vmy.cn/api/music/wy/top?t=1
+
+
+###
+GET https://api.52vmy.cn/api/music/wy/rand
+
+
+###
+GET https://api.52vmy.cn/api/img/tu/yuan
+###
+GET https://api.52vmy.cn/api/img/tu/cat
+
+###
+GET  https://api.52vmy.cn/api/video/jx?url=https://v.douyin.com/i8Upbh6w
+
+
+###
+GET https://api.52vmy.cn/api/img/fan?url=https://api.52vmy.cn/wx.png
+
+###
+GET https://api.52vmy.cn/api/img/heibai?url=https://api.52vmy.cn/wx.png
