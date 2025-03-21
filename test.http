@@ -37,3 +37,9 @@ GET https://api.52vmy.cn/api/video/yule
 
 ###
 GET https://api.52vmy.cn/api/video/redian
+
+###
+POST http://localhost:3000/api/hospital/visits/generate
+
+###
+GET https://api.kuleu.com/api/MP4_xiaojiejie?type=json

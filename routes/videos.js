@@ -144,4 +144,122 @@ router.get('/redian', async (req, res) => {
   }
 });
 
+
+// 在现有路由后添加合法短视频接口
+router.get('/short', async (req, res) => {
+  try {
+    const apiResponse = await fetch('https://www.douyin.com/aweme/v1/web/aweme/post/', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://www.douyin.com/'
+      }
+    });
+
+    if (!apiResponse.ok) throw new Error(`API请求失败: ${apiResponse.status}`);
+    const data = await apiResponse.json();
+
+    // 合法内容筛选模板
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>短视频推荐</title>
+        <style>
+          /* 与现有视频样式保持一致 */
+          body { background: #1a1a1a; }
+          .video-grid {
+            max-width: 600px;
+            margin: 20px auto;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="video-grid">
+          ${data.aweme_list.slice(0, 3).map(item => `
+            <video controls width="100%" poster="${item.video.cover.url_list[0]}">
+              <source src="${item.video.play_addr.url_list[0]}" type="video/mp4">
+            </video>
+          `).join('')}
+        </div>
+      </body>
+      </html>
+    `);
+  } catch (error) {
+    res.status(500).send(`内容加载失败: ${error.message}`);
+  }
+});
+
+
+router.get('/xiaojiejie', async (req, res) => {
+  try {
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('请求超时')), 5000);
+    });
+
+    const apiResponse = await Promise.race([
+      fetch('https://api.kuleu.com/api/MP4_xiaojiejie?type=json', {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          'Referer': 'https://example.com/'
+        }
+      }),
+      timeoutPromise
+    ]);
+
+    if (!apiResponse.ok) throw new Error(`API请求失败：${apiResponse.status}`);
+    const data = await apiResponse.json();
+
+    // 添加HTML视频播放模板
+    res.set('Content-Type', 'text/html');
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>小姐姐视频</title>
+        <style>
+          body { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          }
+          .video-container {
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            overflow: hidden;
+          }
+          video {
+            width: 100%;
+            height: auto;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="video-container">
+          <video controls autoplay loop muted playsinline>
+            <source src="${data.mp4_video}" type="video/mp4">
+            您的浏览器不支持视频播放，请使用现代浏览器
+          </video>
+        </div>
+      </body>
+      </html>
+    `);
+
+  } catch (error) {
+    // 保持错误处理风格统一
+    res.status(500).json({
+      code: 500,
+      error: error.message,
+      request_url: req.originalUrl,
+      timestamp: new Date().toISOString(),
+      tip: "问题反馈请加用户群"
+    });
+  }
+});
+
+
 module.exports = router;

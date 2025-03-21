@@ -18,6 +18,7 @@ const eroticRouter = require('./routes/erotic');
 const emailRouter = require('./routes/email');
 const imageRouter = require('./routes/image');
 const animeRouter = require('./routes/anime');
+const hospitalRouter = require('./routes/hospital');
 // const translateRouter = require('./routes/translate');
 // 上面是依赖
 
@@ -52,6 +53,7 @@ app.use('/app/image', imageRouter);
 app.use('/app/anime', animeRouter);
 // app.use('/app/translate', translateRouter);
 // 新增用户数据路由
+app.use('/api/hospital', hospitalRouter);
 app.use('/app/user', userRouter);
 app.use('/app/medicine', medicineRouter);
 app.use('/app/patient', patientRouter);
