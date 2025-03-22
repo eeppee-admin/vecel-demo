@@ -64,7 +64,10 @@ app.use('/app/image', imageRouter);
 app.use('/app/anime', animeRouter);
 // app.use('/app/translate', translateRouter);
 // 新增用户数据路由
-app.use('/api/users', usersRouter);
+if (false) {
+
+    app.use('/api/users', usersRouter);
+}
 app.use('/api/hospital', hospitalRouter);
 app.use('/app/user', userRouter);
 app.use('/app/medicine', medicineRouter);
