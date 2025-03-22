@@ -1,7 +1,19 @@
-const express = require('express');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import fetch from 'node-fetch';
+import passport from 'passport';
+import GoogleStrategy from 'passport-google-oauth20';
+import { OAuth2Client } from 'google-auth-library';
+
+
+
+
+const Strategy = GoogleStrategy.Strategy;
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const router = express.Router();
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 
 // 配置Passport
 // 修改为新的认证策略配置
@@ -81,7 +93,7 @@ const handleOAuthLogin = async (provider, code) => {
 };
 
 // Google验证示例
-const { OAuth2Client } = require('google-auth-library');
+
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 async function handleGoogle(code) {
@@ -92,8 +104,7 @@ async function handleGoogle(code) {
     return ticket.getPayload();
 }
 
-// Facebook验证示例
-const fetch = require('node-fetch');
+
 async function handleFacebook(code) {
     const response = await fetch(`https://graph.facebook.com/v19.0/oauth/access_token?
         client_id=${process.env.FB_CLIENT_ID}&
@@ -157,4 +168,4 @@ async function handleFacebook(code) {
 //         res.status(500).json({ code: 500, error: error.message });
 //     }
 // });
-module.exports = router;
+export default router;

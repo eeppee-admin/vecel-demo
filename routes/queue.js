@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
 
 // 基础数据池
@@ -60,4 +61,4 @@ router.get('/', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

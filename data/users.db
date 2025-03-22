@@ -1,0 +1,4 @@
+{"username":"testuser","password_hash":"$2b$10$rxzg49ZM56lCxCSYGG0OxuiI366NH/SsevYYdUonXSrzmcfEy7DRC","email":"test@example.com","is_admin":false,"_id":"ZIm6wI0WHaEypI9W","createdAt":{"$$date":1742608636485},"updatedAt":{"$$date":1742608636485}}
+{"username":"admin","password_hash":"$2b$10$jQAOmOv2VIheJrETxUS4f.in0ss.RJ2WAKiTshkVjGpR7Hm8nIw.q","is_admin":false,"_id":"cvSgD9Ity1wCygIK","createdAt":{"$$date":1742608562626},"updatedAt":{"$$date":1742608562626}}
+{"$$indexCreated":{"fieldName":"username","unique":true,"sparse":false}}
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}

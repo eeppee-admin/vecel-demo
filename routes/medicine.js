@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
 
 // 西药基础数据
@@ -121,4 +122,4 @@ router.get('/sick-templates', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

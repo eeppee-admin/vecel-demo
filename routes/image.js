@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
-const fetch = require('node-fetch');
 
 router.get('/girl', async (req, res) => {
     try {
@@ -62,4 +62,4 @@ router.get('/girl', async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;

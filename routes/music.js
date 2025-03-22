@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
-const fetch = require('node-fetch');
 
 router.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
       </body>
       </html>
     `);
-    
+
   } catch (error) {
     res.status(500).json({
       code: 500,
@@ -66,4 +66,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+// - Replace const ... = require() with import ... from
+// - Change module.exports = router to export default router
+export default router;

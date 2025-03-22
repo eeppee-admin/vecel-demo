@@ -1,7 +1,9 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
-const nodemailer = require('nodemailer');
-const crypto = require('crypto');
+import nodemailer from 'nodemailer';
+import crypto from 'crypto';
+
 
 // 内存存储验证码（生产环境建议使用Redis）
 const codeStorage = new Map();
@@ -80,4 +82,4 @@ router.post('/send', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

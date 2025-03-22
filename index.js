@@ -1,26 +1,37 @@
-const express = require('express');
-const app = express();
-require('dotenv').config();
-const session = require('express-session');
-const passport = require('passport');
-const path = require('path');
-const morgan = require('morgan');
+import dotenv from 'dotenv';
+dotenv.config();
 
-// 引入路由文件
-const videoRouter = require('./routes/videos');
-const tiangouRouter = require('./routes/tiangou');
-const musicRouter = require('./routes/music');
-const userRouter = require('./routes/user');
-const medicineRouter = require('./routes/medicine');
-const patientRouter = require('./routes/patient');
-const queueRouter = require('./routes/queue');
-const eroticRouter = require('./routes/erotic');
-const emailRouter = require('./routes/email');
-const imageRouter = require('./routes/image');
-const animeRouter = require('./routes/anime');
-const hospitalRouter = require('./routes/hospital');
-// const translateRouter = require('./routes/translate');
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
+import path from 'path';
+import morgan from 'morgan';
+
+
+// 引入路由文件，引入方式迁移到import
+import videoRouter from './routes/videos.js';
+import tiangouRouter from './routes/tiangou.js';
+import musicRouter from './routes/music.js';
+import userRouter from './routes/user.js';
+
+import medicineRouter from './routes/medicine.js';
+import patientRouter from './routes/patient.js';
+import queueRouter from './routes/queue.js';
+import eroticRouter from './routes/erotic.js';
+import emailRouter from './routes/email.js';
+import imageRouter from './routes/image.js';
+import animeRouter from './routes/anime.js';
+import hospitalRouter from './routes/hospital.js';
+import usersRouter from './routes/users.js';
+import authRouter from './routes/auth.js';
+
+
 // 上面是依赖
+
+
+const app = express();
+
+
 
 // 基础端点
 app.get('/', (req, res) => {
@@ -53,6 +64,7 @@ app.use('/app/image', imageRouter);
 app.use('/app/anime', animeRouter);
 // app.use('/app/translate', translateRouter);
 // 新增用户数据路由
+app.use('/api/users', usersRouter);
 app.use('/api/hospital', hospitalRouter);
 app.use('/app/user', userRouter);
 app.use('/app/medicine', medicineRouter);
@@ -61,9 +73,11 @@ app.use('/app/queue', queueRouter);
 app.use('/app/erotic', eroticRouter);
 app.use('/app/email', emailRouter);
 // 引入认证路由
-const authRouter = require('./routes/auth');
+
+
 app.use('/app/auth', authRouter);
 
+// 新增文件上传路由，仅在开发环境下启用
 if (false) {
     const fileRouter = require('./routes/file');
     app.use('/app/file', fileRouter);
@@ -79,13 +93,18 @@ if (false) {
 
 
 
+
+
+
+
 // Vercel服务器配置
 if (process.env.VERCEL_ENV) {
     module.exports = app;
 } else {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
-        console.log(`服务运行中: http://localhost:${PORT}`);
+        console.log(`🚀 服务运行中: http://localhost:${PORT}`);
     });
 }
+
 

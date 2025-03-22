@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
-const fetch = require('node-fetch');
 
 // 跨域中间件
 router.use((req, res, next) => {
@@ -262,4 +262,4 @@ router.get('/xiaojiejie', async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;

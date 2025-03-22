@@ -6,19 +6,34 @@
         "start": "node index.js",
         "dev": "nodemon index.js --watch routes --ext js,json"
     },
+    "type": "module",
     "dependencies": {
+        "@graphql-tools/schema": "^10.0.23",
+        "amqplib": "^0.10.5",
+        "apollo-server-express": "^3.13.0",
         "axios": "^1.8.4",
+        "bcryptjs": "^3.0.2",
+        "compression": "^1.8.0",
+        "cors": "^2.8.5",
         "dotenv": "^16.4.7",
         "express": "^4.21.2",
         "express-rate-limit": "^7.5.0",
         "express-session": "^1.18.1",
         "google-auth-library": "^9.15.1",
+        "graphql": "^16.10.0",
+        "graphql-depth-limit": "^1.1.0",
+        "graphql-subscriptions": "^3.0.0",
+        "helmet": "^8.1.0",
+        "jsonwebtoken": "^9.0.2",
         "morgan": "^1.10.0",
+        "nedb": "^1.8.0",
         "node-fetch": "2.6.7",
         "nodemailer": "^6.10.0",
         "nodemon": "^3.1.9",
         "passport": "^0.7.0",
-        "passport-google-oauth20": "^2.0.0"
+        "passport-google-oauth20": "^2.0.0",
+        "subscriptions-transport-ws": "^0.11.0",
+        "uuid": "^11.1.0"
     },
     "license": "MIT"
 }

@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
-const fetch = require('node-fetch');
 
 // 舔狗日记接口
 router.get('/', async (req, res) => {
@@ -22,4 +22,4 @@ router.get('/', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

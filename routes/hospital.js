@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
 
 // 生成随机就诊记录数据
@@ -60,4 +61,4 @@ router.get('/visits/generate', (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

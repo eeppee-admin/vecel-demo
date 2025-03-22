@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -34,4 +35,4 @@ router.get('/', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

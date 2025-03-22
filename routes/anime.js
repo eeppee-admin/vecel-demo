@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
 const router = express.Router();
-const axios = require('axios');
+import axios from 'axios'; // 引入axios库
 
 router.get('/bilibili', async (req, res) => {
     try {
@@ -44,4 +45,4 @@ router.get('/bilibili', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
