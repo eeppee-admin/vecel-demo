@@ -13,11 +13,12 @@ const apiLimiter = rateLimit({
 const recaptchaMiddleware = (req, res, next) => {
     const token = req.headers['x-recaptcha-token'];
     if (!token) return res.status(403).json({ code: 403, error: "需要人机验证" });
-    
+
     // 调用Google reCAPTCHA验证
     fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${token}`)
         .then(r => r.json())
         .then(data => data.success ? next() : res.status(403).json({ code: 403, error: "验证失败" }));
 };
 
-module.exports = { apiLimiter, recaptchaMiddleware };
+// module.exports = { apiLimiter, recaptchaMiddleware };
+export { apiLimiter, recaptchaMiddleware };

@@ -99,10 +99,9 @@ if (false) {
 
 
 
-
 // Vercel服务器配置
 if (process.env.VERCEL_ENV) {
-    module.exports = app;
+
 } else {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
@@ -111,3 +110,4 @@ if (process.env.VERCEL_ENV) {
 }
 
 
+export default app;

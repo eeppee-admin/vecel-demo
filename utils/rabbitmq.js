@@ -24,23 +24,23 @@ class VideoMQ {
   async init() {
     this.connection = await amqp.connect(MQ_CONFIG.URL);
     this.channel = await this.connection.createChannel();
-    
+
     // 声明死信交换
     await this.channel.assertExchange(MQ_CONFIG.EXCHANGES.DLX, 'direct', { durable: true });
-    
+
     // 声明主交换
     await this.channel.assertExchange(MQ_CONFIG.EXCHANGES.VIDEO, 'direct', { durable: true });
-    
+
     // 创建任务队列（带死信配置）
     await this.channel.assertQueue(MQ_CONFIG.QUEUES.TASKS, {
       durable: true,
       deadLetterExchange: MQ_CONFIG.EXCHANGES.DLX,
       deadLetterRoutingKey: MQ_CONFIG.QUEUES.DLQ
     });
-    
+
     // 绑定队列
     await this.channel.bindQueue(MQ_CONFIG.QUEUES.TASKS, MQ_CONFIG.EXCHANGES.VIDEO, 'task');
-    
+
     // 初始化消费者
     this.setupConsumers();
   }
@@ -52,7 +52,7 @@ class VideoMQ {
       timestamp: new Date().toISOString(),
       payload: task
     };
-    
+
     return this.channel.publish(
       MQ_CONFIG.EXCHANGES.VIDEO,
       'task',
@@ -85,4 +85,6 @@ class VideoMQ {
   }
 }
 
-module.exports = new VideoMQ();
+// module.exports = new VideoMQ();
+
+export default VideoMQ;

@@ -60,5 +60,4 @@ router.get('/', async (req, res) => {
     }
 });
 
-module.exports = router;
-// 这个接口废了
+export default router;
