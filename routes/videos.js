@@ -262,4 +262,74 @@ router.get('/xiaojiejie', async (req, res) => {
 });
 
 
+router.get('/download', async (req, res) => {
+  try {
+    // 从查询参数获取video_link
+    const video_link = req.query.video_link;
+    // 从环境变量获取API密钥
+    const API_KEY = process.env.RAPIDAPI_KEY;
+
+    // 修改验证逻辑
+    if (req.headers['x-rapidapi-key'] !== API_KEY) {
+      return res.status(403).json({ code: 403, error: "无效的API密钥" });
+    }
+
+    if (!video_link) {
+      return res.status(400).json({ code: 400, error: "缺少视频链接参数" });
+    }
+
+    // 调用第三方API
+    const apiResponse = await fetch('https://porn-xnxx-api.p.rapidapi.com/download', {
+      method: 'POST',
+      headers: {
+        'X-RapidAPI-Key': API_KEY,
+        'X-RapidAPI-Host': 'porn-xnxx-api.p.rapidapi.com',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ video_link })
+    });
+
+    const data = await apiResponse.json();
+
+    // 生成视频播放页面
+    res.send(`
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>视频播放器</title>
+              <style>
+                  video { width: 100%; max-width: 800px; }
+                  .quality-switcher { margin: 20px; }
+              </style>
+          </head>
+          <body>
+              <div class="quality-switcher">
+                  <button onclick="switchQuality('high')">高清</button>
+                  <button onclick="switchQuality('low')">流畅</button>
+              </div>
+              <video id="player" controls autoplay>
+                  <source src="${data.video_high}" type="video/mp4">
+              </video>
+              <script>
+                  function switchQuality(type) {
+                      const player = document.getElementById('player');
+                      player.src = type === 'high' 
+                          ? "${data.video_high}"
+                          : "${data.video_low}";
+                      player.load();
+                  }
+              </script>
+          </body>
+          </html>
+      `);
+
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      error: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 module.exports = router;

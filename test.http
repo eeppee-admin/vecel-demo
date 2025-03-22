@@ -43,3 +43,18 @@ POST http://localhost:3000/api/hospital/visits/generate
 
 ###
 GET https://api.kuleu.com/api/MP4_xiaojiejie?type=json
+
+
+###
+POST http://localhost:3000/app/video/download
+X-Rapidapi-Key: e8a0cab8femsh32ae72fd76831c8p1a1993jsnd685db6b7c3a
+Content-Type: application/json
+
+{"video_link":"https://xnxx.com/video-wugb904/fucking_his_step_sister_lexxi_steele_in_high_definition"}
+
+###
+GET http://localhost:3000/app/video/download?video_link=https://xnxx.com/video-wugb904/fucking_his_step_sister_lexxi_steele_in_high_definition
+X-Rapidapi-Key: e8a0cab8femsh32ae72fd76831c8p1a1993jsnd685db6b7c3a
+
+###
+GET http://localhost:3000/app/image/proxy?type=pussy

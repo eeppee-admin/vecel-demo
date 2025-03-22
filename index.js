@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const videoRouter = require('./routes/videos');
 const tiangouRouter = require('./routes/tiangou');
 const musicRouter = require('./routes/music');
+const qrcodeRouter = require('./routes/qrcode');
 const userRouter = require('./routes/user');
 const medicineRouter = require('./routes/medicine');
 const patientRouter = require('./routes/patient');
@@ -19,6 +20,7 @@ const emailRouter = require('./routes/email');
 const imageRouter = require('./routes/image');
 const animeRouter = require('./routes/anime');
 const hospitalRouter = require('./routes/hospital');
+
 // const translateRouter = require('./routes/translate');
 // 上面是依赖
 
@@ -51,6 +53,8 @@ app.use('/app/tiangou', tiangouRouter);
 app.use('/app/music', musicRouter);
 app.use('/app/image', imageRouter);
 app.use('/app/anime', animeRouter);
+
+app.use('/app/qrcode', qrcodeRouter);
 // app.use('/app/translate', translateRouter);
 // 新增用户数据路由
 app.use('/api/hospital', hospitalRouter);
